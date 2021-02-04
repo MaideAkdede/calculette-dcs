@@ -1,7 +1,6 @@
 <?php
 $result = '';
 if(isset($_GET['nbr1']) && isset($_GET['nbr2'])){
-
     if($_GET['operation'] === 'add'){
         $result = $_GET['nbr1'] + $_GET['nbr2'];
     }
