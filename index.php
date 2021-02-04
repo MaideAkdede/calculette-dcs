@@ -53,10 +53,6 @@ if (isset($num1) && isset($num2)){
       Calculette
     </title>
     <link rel="stylesheet" type="text/css" href="style.css">
-    <!--[if lt IE 9]>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <![endif]-->
   </head>
   <body>
   <h1>Calculette</h1>
@@ -65,11 +61,13 @@ if (isset($num1) && isset($num2)){
       <label for="nbr1">Nombre 1</label>
       <input type="text"
              name="nbr1"
+             id="nbr1"
              value="<?= $num1 ?? $value  ;?>">
 
       <label for="nbr2">Nombre 2</label>
       <input type="text"
              name="nbr2"
+             id="nbr2"
              value="<?=$num2 ?? $value ;?>">
 
       <button type="submit" value="add" name="operation">+</button>
@@ -79,9 +77,11 @@ if (isset($num1) && isset($num2)){
       <button type="submit" value="pow" name="operation">^</button>
   </form>
 
-  <p class="error"><?= $error_msg ;?></p>
+  <?php if($error_msg): ?>
+      <p class="error"><?= $error_msg ;?></p>
+  <?php endif ;?>
 
-  <?php if($result !== ''): ?>
+  <?php if($result): ?>
       <p class="result"><span><?= $num1.' '.$sign.' '. $num2 ;?> = <?= $result ;?></span></p>
   <?php endif ;?>
 
