@@ -70,11 +70,16 @@ if (isset($num1) && isset($num2)){
              id="nbr2"
              value="<?=$num2 ?? $value ;?>">
 
-      <button type="submit" value="add" name="operation">+</button>
-      <button type="submit" value="sub" name="operation">-</button>
-      <button type="submit" value="mult" name="operation">*</button>
-      <button type="submit" value="div" name="operation">/</button>
-      <button type="submit" value="pow" name="operation">^</button>
+      <button type="submit" value="add" name="operation"
+              title="Additionner <?= $num1 . ' avec ' . $num2 ;?> ">+</button>
+      <button type="submit" value="sub" name="operation"
+              title="Soustraire <?= $num1 . ' avec ' . $num2 ;?> ">-</button>
+      <button type="submit" value="mult" name="operation"
+              title="Multiplier <?= $num1 . ' avec ' . $num2 ;?> ">*</button>
+      <button type="submit" value="div" name="operation"
+              title="Diviser <?= $num1 . ' avec ' . $num2 ;?> ">/</button>
+      <button type="submit" value="pow" name="operation"
+              title="Puissance <?= $num1 . ' avec ' . $num2 ;?> ">^</button>
   </form>
 
   <?php if($error_msg): ?>
