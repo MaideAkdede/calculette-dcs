@@ -1,23 +1,44 @@
 <?php
+$num1= $_GET['nbr1'];
+$num2 =  $_GET['nbr2'];
+$value = '0';
+
 $result = '';
-if(isset($_GET['nbr1']) && isset($_GET['nbr2'])){
-    if($_GET['operation'] === 'add'){
-        $result = $_GET['nbr1'] + $_GET['nbr2'];
-    }
-    if($_GET['operation'] === 'sub'){
-        $result = $_GET['nbr1'] - $_GET['nbr2'];
-    }
-    if($_GET['operation'] === 'mult'){
-        $result = $_GET['nbr1'] * $_GET['nbr2'];
-    }
-    if($_GET['operation'] === 'div'){
-        $result = $_GET['nbr1'] / $_GET['nbr2'];
-    }
-    if($_GET['operation'] === 'pow'){
-        $result = $_GET['nbr1'] ** $_GET['nbr2'];
+$sign = '';
+$error_msg = '';
+
+if (isset($num1) && isset($num2)){
+    if (!is_numeric($num1) || !is_numeric($num2)){
+        $error_msg = 'Veuillez écrire uniquement des nombres';
+    } else {
+        switch ($_GET['operation']) {
+            case 'add':
+                $result = $num1 + $num2;
+                $sign = '+';
+                break;
+            case 'sub':
+                $result = $num1 - $num2;
+                $sign = '-';
+                break;
+            case 'mult':
+                $result = $num1 * $num2;
+                $sign = '*';
+                break;
+            case 'div':
+                if ($num1 == '0' || $num2 == '0') {
+                    $error_msg = 'Vous ne pouvez pas diviser de nombre 0 ';
+                } else {
+                    $result = $num1 / $num2;
+                    $sign = '/';
+                }
+                break;
+            case 'pow':
+                $result = $num1 ** $num2;
+                $sign = '^';
+                break;
+        }
     }
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -31,7 +52,7 @@ if(isset($_GET['nbr1']) && isset($_GET['nbr2'])){
     <title>
       Calculette
     </title>
-    <link rel="stylesheet" type="text/css" href="./css/style.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
     <!--[if lt IE 9]>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -39,18 +60,30 @@ if(isset($_GET['nbr1']) && isset($_GET['nbr2'])){
   </head>
   <body>
   <h1>Calculette</h1>
-  <form action="<?= $_SERVER['PHP_SELF'] ?>" method="get">
+  <form action="<?= $_SERVER['PHP_SELF'] ;?>" method="get">
+
       <label for="nbr1">Nombre 1</label>
-      <input type="text" name="nbr1" value="<?= isset($_GET['nbr1']) ? $_GET['nbr1'] : '0' ?>">
+      <input type="text"
+             name="nbr1"
+             value="<?= $num1 ?? $value  ;?>">
 
       <label for="nbr2">Nombre 2</label>
-      <input type="text" name="nbr2" value="<?= $_GET['nbr2'] ?? '0' ?>">
+      <input type="text"
+             name="nbr2"
+             value="<?=$num2 ?? $value ;?>">
+
       <button type="submit" value="add" name="operation">+</button>
       <button type="submit" value="sub" name="operation">-</button>
       <button type="submit" value="mult" name="operation">*</button>
       <button type="submit" value="div" name="operation">/</button>
       <button type="submit" value="pow" name="operation">^</button>
   </form>
-  <p><?= $result; ?></p>
+
+  <p class="error"><?= $error_msg ;?></p>
+
+  <?php if($result !== ''): ?>
+      <p class="result"><span><?= $num1.' '.$sign.' '. $num2 ;?> = <?= $result ;?></span></p>
+  <?php endif ;?>
+
   </body>
 </html>
