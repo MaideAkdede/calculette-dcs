@@ -1,0 +1,6 @@
+.result span{
+    font-weight: bold;
+}
+.error{
+    color: #ff5151;
+}
