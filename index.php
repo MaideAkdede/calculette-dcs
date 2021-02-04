@@ -17,8 +17,8 @@ if(isset($_GET['nbr1']) && isset($_GET['nbr2'])){
     if($_GET['operation'] === 'pow'){
         $result = $_GET['nbr1'] ** $_GET['nbr2'];
     }
-
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
