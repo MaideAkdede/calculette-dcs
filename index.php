@@ -1,4 +1,24 @@
 <?php
+$result = '';
+if(isset($_GET['nbr1']) && isset($_GET['nbr2'])){
+
+    if($_GET['operation'] === 'add'){
+        $result = $_GET['nbr1'] + $_GET['nbr2'];
+    }
+    if($_GET['operation'] === 'sub'){
+        $result = $_GET['nbr1'] - $_GET['nbr2'];
+    }
+    if($_GET['operation'] === 'mult'){
+        $result = $_GET['nbr1'] * $_GET['nbr2'];
+    }
+    if($_GET['operation'] === 'div'){
+        $result = $_GET['nbr1'] / $_GET['nbr2'];
+    }
+    if($_GET['operation'] === 'pow'){
+        $result = $_GET['nbr1'] ** $_GET['nbr2'];
+    }
+
+}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -21,7 +41,17 @@
   <body>
   <h1>Calculette</h1>
   <form action="<?= $_SERVER['PHP_SELF'] ?>" method="get">
-      
+      <label for="nbr1">Nombre 1</label>
+      <input type="text" name="nbr1" value="<?= isset($_GET['nbr1']) ? $_GET['nbr1'] : '0' ?>">
+
+      <label for="nbr2">Nombre 2</label>
+      <input type="text" name="nbr2" value="<?= $_GET['nbr2'] ?? '0' ?>">
+      <button type="submit" value="add" name="operation">+</button>
+      <button type="submit" value="sub" name="operation">-</button>
+      <button type="submit" value="mult" name="operation">*</button>
+      <button type="submit" value="div" name="operation">/</button>
+      <button type="submit" value="pow" name="operation">^</button>
   </form>
+  <p><?= $result; ?></p>
   </body>
 </html>
